@@ -66,6 +66,6 @@ func init() {
 	replyCmd.Flags().StringVar(&replyChannelID, "channel-id", "", "Slack channel ID (required)")
 	replyCmd.Flags().StringVar(&replyThreadTS, "thread-ts", "", "Thread timestamp to reply to (required)")
 
-	replyCmd.MarkFlagRequired("channel-id")
-	replyCmd.MarkFlagRequired("thread-ts")
+	_ = replyCmd.MarkFlagRequired("channel-id")
+	_ = replyCmd.MarkFlagRequired("thread-ts")
 }
