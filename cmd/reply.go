@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	replyApiKey   string
+	replyAPIKey   string
 	replyChannelID string
 	replyThreadTS string
 )
@@ -24,7 +24,7 @@ var replyCmd = &cobra.Command{
 		message := args[0]
 
 		// Get API key from parameter or environment variable (parameter has priority)
-		key := replyApiKey
+		key := replyAPIKey
 		if key == "" {
 			key = os.Getenv("SLACK_API_KEY")
 		}
@@ -62,10 +62,10 @@ var replyCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(replyCmd)
 
-	replyCmd.Flags().StringVar(&replyApiKey, "api-key", "", "Slack API key (can also use SLACK_API_KEY env var)")
+	replyCmd.Flags().StringVar(&replyAPIKey, "api-key", "", "Slack API key (can also use SLACK_API_KEY env var)")
 	replyCmd.Flags().StringVar(&replyChannelID, "channel-id", "", "Slack channel ID (required)")
 	replyCmd.Flags().StringVar(&replyThreadTS, "thread-ts", "", "Thread timestamp to reply to (required)")
-	
+
 	replyCmd.MarkFlagRequired("channel-id")
 	replyCmd.MarkFlagRequired("thread-ts")
 }

@@ -42,15 +42,17 @@ go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
 
 ### Send a message to a channel
 
-```bash
-slack-send-message --api-key xoxb-your-token --channel-id C123456789 "Hello, Slack!"
-```
-
-Using environment variable for API key:
+**Recommended**: Use environment variable for API key (more secure):
 
 ```bash
 export SLACK_API_KEY=xoxb-your-token
 slack-send-message --channel-id C123456789 "Hello, Slack!"
+```
+
+Alternatively, you can pass the API key via flag (not recommended for CI/CD due to security concerns):
+
+```bash
+slack-send-message --api-key xoxb-your-token --channel-id C123456789 "Hello, Slack!"
 ```
 
 The command will output the thread timestamp:
@@ -61,15 +63,17 @@ The command will output the thread timestamp:
 
 ### Reply to a thread
 
-```bash
-slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thread-ts 1234567890.123456 "This is a reply"
-```
-
-Using environment variable for API key:
+**Recommended**: Use environment variable for API key (more secure):
 
 ```bash
 export SLACK_API_KEY=xoxb-your-token
 slack-send-message reply --channel-id C123456789 --thread-ts 1234567890.123456 "This is a reply"
+```
+
+Alternatively, you can pass the API key via flag (not recommended for CI/CD due to security concerns):
+
+```bash
+slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thread-ts 1234567890.123456 "This is a reply"
 ```
 
 ## Parameters

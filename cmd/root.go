@@ -62,6 +62,6 @@ func Execute() {
 func init() {
 	rootCmd.Flags().StringVar(&apiKey, "api-key", "", "Slack API key (can also use SLACK_API_KEY env var)")
 	rootCmd.Flags().StringVar(&channelID, "channel-id", "", "Slack channel ID (required)")
-	
+
 	rootCmd.MarkFlagRequired("channel-id")
 }
