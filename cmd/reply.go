@@ -29,6 +29,10 @@ var replyCmd = &cobra.Command{
 			return fmt.Errorf("api-key is required (use --api-key flag or SLACK_API_KEY environment variable)")
 		}
 
+		if replyChannelID == "" {
+			return fmt.Errorf("channel-id is required for reply")
+		}
+
 		if replyThreadTS == "" {
 			return fmt.Errorf("thread-ts is required")
 		}
@@ -39,10 +43,6 @@ var replyCmd = &cobra.Command{
 
 		// Create Slack client
 		api := slack.New(key)
-
-		if replyChannelID == "" {
-			return fmt.Errorf("channel-id is required for reply")
-		}
 
 		// Send reply message
 		_, timestamp, err := api.PostMessage(
