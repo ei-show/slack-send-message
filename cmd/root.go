@@ -11,14 +11,17 @@ import (
 var (
 	apiKey    string
 	channelID string
-	message   string
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "slack-send-message",
+	Use:   "slack-send-message [message]",
 	Short: "Send a message to a Slack channel",
 	Long:  `Send a message to a specific Slack channel using the Slack API and return the thread timestamp.`,
+	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Get message from positional argument
+		message := args[0]
+
 		// Get API key from parameter or environment variable (parameter has priority)
 		key := apiKey
 		if key == "" {
@@ -30,10 +33,6 @@ var rootCmd = &cobra.Command{
 
 		if channelID == "" {
 			return fmt.Errorf("channel-id is required")
-		}
-
-		if message == "" {
-			return fmt.Errorf("message is required")
 		}
 
 		// Create Slack client
@@ -63,8 +62,6 @@ func Execute() {
 func init() {
 	rootCmd.Flags().StringVar(&apiKey, "api-key", "", "Slack API key (can also use SLACK_API_KEY env var)")
 	rootCmd.Flags().StringVar(&channelID, "channel-id", "", "Slack channel ID (required)")
-	rootCmd.Flags().StringVar(&message, "message", "", "Message to send (required)")
 	
 	rootCmd.MarkFlagRequired("channel-id")
-	rootCmd.MarkFlagRequired("message")
 }
