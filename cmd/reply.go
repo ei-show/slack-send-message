@@ -9,7 +9,8 @@ import (
 )
 
 var (
-	replyApiKey  string
+	replyApiKey   string
+	replyChannelID string
 	replyThreadTS string
 	replyMessage  string
 )
@@ -39,18 +40,13 @@ var replyCmd = &cobra.Command{
 		// Create Slack client
 		api := slack.New(key)
 
-		// Extract channel ID from the thread-ts context
-		// In Slack API, to reply to a thread, we need both channel ID and thread_ts
-		// For simplicity, we'll use the same channel-id flag from root command
-		// But we need to get the channel ID somehow - let's add it as a flag
-		channelIDForReply := channelID
-		if channelIDForReply == "" {
+		if replyChannelID == "" {
 			return fmt.Errorf("channel-id is required for reply")
 		}
 
 		// Send reply message
 		_, timestamp, err := api.PostMessage(
-			channelIDForReply,
+			replyChannelID,
 			slack.MsgOptionText(replyMessage, false),
 			slack.MsgOptionTS(replyThreadTS),
 		)
@@ -68,7 +64,7 @@ func init() {
 	rootCmd.AddCommand(replyCmd)
 
 	replyCmd.Flags().StringVar(&replyApiKey, "api-key", "", "Slack API key (can also use SLACK_API_KEY env var)")
-	replyCmd.Flags().StringVar(&channelID, "channel-id", "", "Slack channel ID (required)")
+	replyCmd.Flags().StringVar(&replyChannelID, "channel-id", "", "Slack channel ID (required)")
 	replyCmd.Flags().StringVar(&replyThreadTS, "thread-ts", "", "Thread timestamp to reply to (required)")
 	replyCmd.Flags().StringVar(&replyMessage, "message", "", "Message to send as reply (required)")
 	
