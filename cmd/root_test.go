@@ -46,7 +46,7 @@ func TestRootCommand(t *testing.T) {
 			// Setup environment
 			for k, v := range tt.env {
 				os.Setenv(k, v)
-				defer os.Unsetenv(k)
+				t.Cleanup(func() { os.Unsetenv(k) })
 			}
 
 			// Create a new root command for each test
