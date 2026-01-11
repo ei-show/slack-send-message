@@ -8,6 +8,12 @@
 *.so
 *.dylib
 
+# Built binary
+slack-send-message
+
+# Build artifacts
+dist/
+
 # Test binary, built with `go test -c`
 *.test
 
