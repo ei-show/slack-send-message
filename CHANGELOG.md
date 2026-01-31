@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/ei-show/slack-send-message/compare/v1.1.0...v1.1.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* ciで実行するgoのバージョンをgo.modを見るように変更 ([42a0562](https://github.com/ei-show/slack-send-message/commit/42a05621ad97f87bbc4facc5ecbfcf2b7a591e14))
+* lintのバージョンアップに伴い、testコードを修正 ([5c1d4bf](https://github.com/ei-show/slack-send-message/commit/5c1d4bfc2581eca251b49fd07962c4847ffe8b73))
+
 ## [1.1.0](https://github.com/ei-show/slack-send-message/compare/v1.0.0...v1.1.0) (2026-01-31)
 
 
