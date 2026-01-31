@@ -105,3 +105,7 @@ slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thr
     # Later, reply to the thread
     slack-send-message reply --channel-id C123456789 --thread-ts $THREAD_TS "Build completed successfully"
 ```
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project, including information about the automated release process and commit message conventions.
