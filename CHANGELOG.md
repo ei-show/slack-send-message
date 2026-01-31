@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/ei-show/slack-send-message/compare/v1.2.0...v1.2.1) (2026-01-31)
+
+
+### Bug Fixes
+
+* ci: usesをhashで定義 ([e6bce87](https://github.com/ei-show/slack-send-message/commit/e6bce87ea23b454cdadf373fad527bb2b5c2605f))
+* ci: usesをhashで定義 ([6e935f7](https://github.com/ei-show/slack-send-message/commit/6e935f70233a94870d06b56d87a170a989d6c1ae))
+
 ## [1.2.0](https://github.com/ei-show/slack-send-message/compare/v1.1.1...v1.2.0) (2026-01-31)
 
 
