@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/ei-show/slack-send-message/compare/v1.1.1...v1.2.0) (2026-01-31)
+
+
+### Features
+
+* ci/cd create container image. ([7e281b7](https://github.com/ei-show/slack-send-message/commit/7e281b7f57eba4d4f56547c061463b78ce9c4d43))
+
 ## [1.1.1](https://github.com/ei-show/slack-send-message/compare/v1.1.0...v1.1.1) (2026-01-31)
 
 
