@@ -32,7 +32,6 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: write
-      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -66,6 +65,17 @@ jobs:
           files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docker-build-and-push:
+    needs: release-please
+    runs-on: ubuntu-latest
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

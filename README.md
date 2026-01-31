@@ -127,16 +127,14 @@ slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thr
 ```yaml
 # Using Docker image
 notify_slack:
-  image: docker:latest
-  services:
-    - docker:dind
+  image: ghcr.io/ei-show/slack-send-message:latest
   variables:
     SLACK_API_KEY: $SLACK_API_KEY
   script:
-    - docker run --rm -e SLACK_API_KEY ghcr.io/ei-show/slack-send-message:latest --channel-id C123456789 "Build started"
+    - /slack-send-message --channel-id C123456789 "Build started"
     # For threaded messages, capture the output:
-    - THREAD_TS=$(docker run --rm -e SLACK_API_KEY ghcr.io/ei-show/slack-send-message:latest --channel-id C123456789 "Build started")
-    - docker run --rm -e SLACK_API_KEY ghcr.io/ei-show/slack-send-message:latest reply --channel-id C123456789 --thread-ts "$THREAD_TS" "Build completed"
+    - THREAD_TS=$(/slack-send-message --channel-id C123456789 "Build started")
+    - /slack-send-message reply --channel-id C123456789 --thread-ts "$THREAD_TS" "Build completed"
 ```
 
 ## Contributing
