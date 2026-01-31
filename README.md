@@ -14,6 +14,14 @@ A CLI tool written in Go to send messages to Slack channels using the Slack API.
 
 ## Installation
 
+### Docker
+
+Pull the Docker image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/ei-show/slack-send-message:latest
+```
+
 ### Download from releases
 
 Download the latest binary for your platform from the [releases page](https://github.com/ei-show/slack-send-message/releases).
@@ -27,6 +35,16 @@ go build -o slack-send-message .
 ## Usage
 
 ### Send a message to a channel
+
+#### Using Docker
+
+**Recommended for production/CI/CD**: Use environment variable for API key (more secure):
+
+```bash
+docker run --rm -e SLACK_API_KEY=xoxb-your-token ghcr.io/ei-show/slack-send-message:latest --channel-id C123456789 "Hello, Slack!"
+```
+
+#### Using Binary
 
 **Recommended for production/CI/CD**: Use environment variable for API key (more secure):
 
@@ -48,6 +66,16 @@ The command will output the thread timestamp:
 ```
 
 ### Reply to a thread
+
+#### Using Docker
+
+**Recommended for production/CI/CD**: Use environment variable for API key (more secure):
+
+```bash
+docker run --rm -e SLACK_API_KEY=xoxb-your-token ghcr.io/ei-show/slack-send-message:latest reply --channel-id C123456789 --thread-ts 1234567890.123456 "This is a reply"
+```
+
+#### Using Binary
 
 **Recommended for production/CI/CD**: Use environment variable for API key (more secure):
 
@@ -79,8 +107,10 @@ slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thr
 
 ## CI/CD Usage Example
 
+### GitHub Actions
+
 ```yaml
-# GitHub Actions example
+# Using binary
 - name: Send Slack notification
   env:
     SLACK_API_KEY: ${{ secrets.SLACK_API_KEY }}
@@ -90,6 +120,21 @@ slack-send-message reply --api-key xoxb-your-token --channel-id C123456789 --thr
     
     # Later, reply to the thread
     slack-send-message reply --channel-id C123456789 --thread-ts $THREAD_TS "Build completed successfully"
+```
+
+### GitLab CI
+
+```yaml
+# Using Docker
+notify_slack:
+  image: ghcr.io/ei-show/slack-send-message:latest
+  script:
+    - THREAD_TS=$(./slack-send-message --channel-id C123456789 "Build started")
+    - echo "Thread TS: $THREAD_TS"
+    # Later, reply to the thread
+    - ./slack-send-message reply --channel-id C123456789 --thread-ts $THREAD_TS "Build completed successfully"
+  variables:
+    SLACK_API_KEY: $SLACK_API_KEY
 ```
 
 ## Contributing
