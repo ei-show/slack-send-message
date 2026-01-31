@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/ei-show/slack-send-message/compare/v1.0.0...v1.1.0) (2026-01-31)
+
+
+### Features
+
+* Dependabot configuration file ([d987bbe](https://github.com/ei-show/slack-send-message/commit/d987bbef6446ae8095c88fb9dd5ade49d5e9dfbc))
+* Enable Dependabot ([d8b2553](https://github.com/ei-show/slack-send-message/commit/d8b255325fec0b8cfa8b2b450da060eab8012b06))
+
+
+### Bug Fixes
+
+* .github/dependabot.yml ([7d7acc4](https://github.com/ei-show/slack-send-message/commit/7d7acc4daee35cd4e3bfbc4a412fe245e047e626))
+
 ## 1.0.0 (2026-01-31)
 
 
