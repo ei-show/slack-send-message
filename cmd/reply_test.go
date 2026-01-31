@@ -51,8 +51,14 @@ func TestReplyCommand(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// Setup environment
 			for k, v := range tt.env {
-				os.Setenv(k, v)
-				t.Cleanup(func() { os.Unsetenv(k) })
+				if err := os.Setenv(k, v); err != nil {
+					t.Fatalf("Setenv failed: %v", err)
+				}
+				t.Cleanup(func() {
+					if err := os.Unsetenv(k); err != nil {
+						t.Errorf("Unsetenv failed: %v", err)
+					}
+				})
 			}
 
 			// Create a new root command for each test

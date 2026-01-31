@@ -24,20 +24,6 @@ Download the latest binary for your platform from the [releases page](https://gi
 go build -o slack-send-message .
 ```
 
-## Development
-
-### Running tests
-
-```bash
-go test -v ./...
-```
-
-### Running with coverage
-
-```bash
-go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
-```
-
 ## Usage
 
 ### Send a message to a channel

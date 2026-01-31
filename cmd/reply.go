@@ -9,9 +9,9 @@ import (
 )
 
 var (
-	replyAPIKey   string
+	replyAPIKey    string
 	replyChannelID string
-	replyThreadTS string
+	replyThreadTS  string
 )
 
 var replyCmd = &cobra.Command{
