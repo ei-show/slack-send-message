@@ -1,0 +1,9 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "go",
+      "include-component-in-tag": false
+    }
+  },
+  "bootstrap-sha": "97c5d497ca7b9b8a7c135535a7e36b673b9c80f0"
+}
