@@ -25,43 +25,18 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  build-and-release:
-    needs: release-please
-    runs-on: ubuntu-latest
-    if: ${{ needs.release-please.outputs.release_created }}
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: 'go.mod'
-
-      - name: Run tests
-        run: go test -v ./...
-
-      - name: Build binaries
+      - uses: actions/checkout@v4
+      - name: tag major and minor versions
+        if: ${{ steps.release.outputs.release_created }}
         run: |
-          # Create dist directory
-          mkdir -p dist
-          # Build for multiple platforms
-          GOOS=linux GOARCH=amd64 go build -o dist/slack-send-message-linux-amd64 .
-          GOOS=linux GOARCH=arm64 go build -o dist/slack-send-message-linux-arm64 .
-          GOOS=darwin GOARCH=amd64 go build -o dist/slack-send-message-darwin-amd64 .
-          GOOS=darwin GOARCH=arm64 go build -o dist/slack-send-message-darwin-arm64 .
-          GOOS=windows GOARCH=amd64 go build -o dist/slack-send-message-windows-amd64.exe .
-          GOOS=windows GOARCH=arm64 go build -o dist/slack-send-message-windows-arm64.exe .
-
-      - name: Upload Release Artifacts
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ needs.release-please.outputs.tag_name }}
-          files: dist/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/googleapis/release-please-action.git"
+          git tag -d v${{ steps.release.outputs.major }} || true
+          git tag -d v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} || true
+          git push origin :v${{ steps.release.outputs.major }} || true
+          git push origin :v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} || true
+          git tag -a v${{ steps.release.outputs.major }} -m "Release v${{ steps.release.outputs.major }}"
+          git tag -a v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} -m "Release v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}"
+          git push origin v${{ steps.release.outputs.major }}
+          git push origin v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}
