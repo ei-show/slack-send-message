@@ -59,7 +59,7 @@ jobs:
           GOOS=windows GOARCH=arm64 go build -o dist/slack-send-message-windows-arm64.exe .
 
       - name: Upload Release Artifacts
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.release-please.outputs.tag_name }}
           files: dist/*
