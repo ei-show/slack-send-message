@@ -4,6 +4,12 @@ Thank you for your interest in contributing to slack-send-message! This document
 
 ## Development
 
+### Running lint
+
+```bash
+golangci-lint run ./...
+```
+
 ### Running tests
 
 ```bash
