@@ -1,9 +1,9 @@
 module github.com/ei-show/slack-send-message
 
-go 1.24.11
+go 1.25
 
 require (
-	github.com/slack-go/slack v0.17.3
+	github.com/slack-go/slack v0.19.0
 	github.com/spf13/cobra v1.10.2
 )
 
