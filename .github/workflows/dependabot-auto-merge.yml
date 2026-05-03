@@ -26,7 +26,8 @@ jobs:
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
           steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
           steps.metadata.outputs.dependency-type == 'direct:security'
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: gh pr merge --auto --squash --repo "$REPO" "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
+          REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
