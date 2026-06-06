@@ -3,7 +3,7 @@ module github.com/ei-show/slack-send-message
 go 1.25
 
 require (
-	github.com/slack-go/slack v0.23.0
+	github.com/slack-go/slack v0.25.0
 	github.com/spf13/cobra v1.10.2
 )
 
